@@ -1,4 +1,7 @@
-# vue-forms
+# Observation-report
+
+## Public
+The site is published at https://filipedoria.github.io/observation-report/
 
 ## Project setup
 ```
@@ -27,3 +30,6 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Instructions for deployment
+See https://medium.com/swlh/deploy-vue-app-to-github-pages-2ada48d7397e

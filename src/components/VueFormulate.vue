@@ -1,41 +1,41 @@
 <template>
   <div>
     <h2>Ficha de registos de observações de cetáceos</h2>
-    <p>Registo o máximo de informação possível.</p>
+    <p>Registe o máximo de informação possível.</p>
     <FormulateForm v-model="formValues" @submit="handleSubmit">
       <FormulateInput
-        name="Company name"
+        name="company"
         label="Empresa"
         validation="required"
-        value="ACME"
+        placeholder="ACME"
       />
       <FormulateInput
-        name="Ship name"
+        name="ship"
         label="Embarcação"
         validation="required"
-        value="ship"
+        placeholder="ship"
       />
       <FormulateInput
         type="date"
-        name="Date"
+        name="date"
         label="Data"
         validation="required"
       />
       <FormulateInput
         type="time"
-        name="Time"
+        name="time"
         label="Hora"
         validation="required"
       />
-      <FormulateInput name="latitude" label="latitude" validation="required" />
+      <FormulateInput name="latitude" label="Latitude" validation="required" />
       <FormulateInput
         name="longitude"
-        label="longitude"
+        label="Longitude"
         validation="required"
       />
       <FormulateInput
         type="button"
-        label="Get Location"
+        label="Obter posição"
         @click="loadInitialData()"
       />
       <FormulateInput
@@ -47,14 +47,14 @@
           Pintado: 'Pintado',
           Comum: 'Comum',
         }"
-        value="Roaz"
+        placeholder="Roaz"
       />
       <FormulateInput
         type="checkbox"
         name="misto"
         label="Avistamento Misto (2+ espécies)"
       />
-      <FormulateInput type="submit" label="Sign Up" />
+      <FormulateInput type="submit" label="Enviar" />
     </FormulateForm>
     <h3>Values:</h3>
     {{ formValues }}
@@ -64,7 +64,16 @@
 <script>
 export default {
   data: () => ({
-    formValues: {},
+    formValues: {
+      company: "",
+      ship: "",
+      especie: "",
+      date: "",
+      time: "",
+      latitude: "0",
+      longitude: "0",
+      misto: false,
+    },
   }),
   methods: {
     handleSubmit() {
