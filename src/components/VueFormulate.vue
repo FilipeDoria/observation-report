@@ -36,7 +36,7 @@
       <FormulateInput
         type="button"
         label="Obter posição"
-        @click="loadInitialData()"
+        @click="loadInitialData(formValues)"
       />
       <FormulateInput
         type="select"
@@ -63,18 +63,20 @@
 
 <script>
 export default {
-  data: () => ({
-    formValues: {
-      company: "",
-      ship: "",
-      especie: "",
-      date: "",
-      time: "",
-      latitude: "0",
-      longitude: "0",
-      misto: false,
-    },
-  }),
+  data() {
+    return {
+      formValues : {
+        company: "",
+        ship: "",
+        especie: "",
+        date: "",
+        time: "",
+        latitude: "0",
+        longitude: "0",
+        misto: false,
+      },
+    };
+  },
   methods: {
     handleSubmit() {
       console.log(this.formValues);
@@ -84,14 +86,12 @@ export default {
         })
       );
     },
-    loadInitialData() {
-      var form = this.formValues;
+    loadInitialData(form) {
       navigator.geolocation.getCurrentPosition(function (pos) {
-        console.log(pos.coords.latitude.toFixed(5));
-        //pos.coords.latitude.toFixed(5);
-        console.log(this.latitude);
+        form.latitude = pos.coords.latitude.toFixed(5);
+        form.longitude = pos.coords.longitude.toFixed(5);
+        console.log(form.latitude);
       });
-      this.formValues = form;
     },
   },
 };
