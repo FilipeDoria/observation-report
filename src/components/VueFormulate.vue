@@ -79,6 +79,11 @@ export default {
   },
   methods: {
     handleSubmit() {
+      
+      //to save form items on local storage to userData variable
+      localStorage.setItem('userData', JSON.stringify(this.formValues));
+      console.log(localStorage.getItem('userData'));
+
       console.log(this.formValues);
       console.log(
         navigator.geolocation.getCurrentPosition(function (pos) {
@@ -92,7 +97,12 @@ export default {
         form.longitude = pos.coords.longitude.toFixed(5);
         console.log(form.latitude);
       });
+
     },
+
   },
 };
+
+
+
 </script>
