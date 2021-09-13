@@ -13,7 +13,7 @@
         name="ship"
         label="Embarcação"
         validation="required"
-        placeholder="ship"
+        placeholder="Ship"
       />
       <FormulateInput
         type="date"
@@ -40,19 +40,93 @@
       />
       <FormulateInput
         type="select"
-        name="especie"
-        label="Espécie"
+        name="especie_golginho"
+        label="Espécie de Golfinho"
         :options="{
           Roaz: 'Roaz',
           Pintado: 'Pintado',
           Comum: 'Comum',
+          Riscado: 'Riscado',
+          Caldeirao: 'Caldeirão',
+          Grampo: 'Grampo',
+          Melao: 'Cabeça de melão',
+          Fraser: 'Fraser',
         }"
-        placeholder="Roaz"
+        placeholder="Golfinho"
+      />
+      <FormulateInput
+        type="select"
+        name="especie_baleia"
+        label="Espécie de Baleia"
+        :options="{
+          Piloto_tropical:'Piloto Tropical',
+          Piloto_barbatanas:'Piloto de barbatanas Longas',
+          Falsa_orca:'Falsa Orca',
+        }"
+        placeholder="Baleia"
       />
       <FormulateInput
         type="checkbox"
         name="misto"
         label="Avistamento Misto (2+ espécies)"
+      />
+      <FormulateInput
+        type="number"
+        name="total_individuos"
+        label="Número de individuos"
+        validation="required"
+      />
+      <FormulateInput
+        type="number"
+        name="crias"
+        label="Número de crias"
+        validation="required"
+      />
+      <FormulateInput
+        type="select"
+        name="comportamento"
+        label="Comportamento"
+        placeholder="Comportamento dos indivíduos"
+        :options="{
+          Deslocacao: 'Deslocação',
+          Alimentacao: 'Alimentação',
+          Repouso: 'Repouse',
+          Socializacao: 'Socialização',
+          Outro: 'Outro',
+        }"
+      />
+      <FormulateInput
+        type="select"
+        name="reacao"
+        label="Reação à embarcação"
+        placeholder="Reação dos indivíduos à embarcação"
+        :options="{
+          Nenhuma: 'Nenhuma/Indiferença',
+          Atracao: 'Atração/aproximação',
+          Evitacao: 'Evitação/afastamento',
+          Outro: 'Outro',
+        }"
+      />
+      <FormulateInput
+        type="select"
+        name="estado_mar"
+        label="Estado do mar (Beaufort)"
+        validation="required"
+        placeholder="0 - Calmo (< 1 Kmh)"
+        :options="{
+          0: '0 - Calmo (< 1 Kmh)',
+          1: '1 - Aragem (1 - 5 Km/h)',
+          2: '2 - Brisa Leve (6 - 11 Km/h)',
+          3: '3 - Brisa Fraca (12 - 19 Km/h)',
+          4: '4 - Brisa Moderada (20 - 28 Km/h)',
+          5: '5 - Brisa Forte (29 - 38 Km/h)',
+          6: '6 - Vento Fresco (39 - 49 Km/h)',
+        }"
+      />
+      <FormulateInput
+        type="text"
+        name="observacoes"
+        label="Observações importante"
       />
       <FormulateInput type="submit" label="Enviar" />
     </FormulateForm>
@@ -71,31 +145,28 @@ export default {
         especie: "",
         date: "",
         time: "",
-        latitude: "0",
-        longitude: "0",
+        latitude: "",
+        longitude: "",
         misto: false,
+        total_individuos: "",
+        crias: "",
+        comportamento: "",
+        reacao: "",
+        estado_mar: "",
+        observacoes: "",
       },
     };
   },
   methods: {
     handleSubmit() {
-      
       //to save form items on local storage to userData variable
       localStorage.setItem('userData', JSON.stringify(this.formValues));
-      console.log(localStorage.getItem('userData'));
-
-      console.log(this.formValues);
-      console.log(
-        navigator.geolocation.getCurrentPosition(function (pos) {
-          return pos.coords.latitude.toFixed(5);
-        })
-      );
+      console.log("Form values saved on localStorage: " + localStorage.getItem('userData'));
     },
     loadInitialData(form) {
       navigator.geolocation.getCurrentPosition(function (pos) {
         form.latitude = pos.coords.latitude.toFixed(5);
         form.longitude = pos.coords.longitude.toFixed(5);
-        console.log(form.latitude);
       });
 
     },
